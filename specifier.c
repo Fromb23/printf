@@ -78,6 +78,18 @@ void specifier_advanced(va_list args, int *count, const char *ptr)
 			*count += print_hex_upper(va_arg(args, unsigned int));
 			break;
 		}
+		case 'S':
+		{
+			char *str = va_arg(args, char *);
+			*count += print_custom_string(str);
+			break;
+		}
+		case 'p':
+		{
+			void *ptr_val = va_arg(args, void *);
+			*count += print_pointer(ptr_val);
+			break;
+		}
 		default:
 		{
 			break;
