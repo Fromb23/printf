@@ -6,11 +6,14 @@
  *
  * Return: The number of characters printed.
  */
-int print_hex_lower(unsigned int n)
+
+int print_hex_lower(unsigned int num, char flag)
 {
-    int count = 0;
-    if (n >= 16)
-        count += print_hex_lower(n / 16);
-    count += _putchar((n % 16) + (n % 16 < 10 ? '0' : 'a' - 10));
-    return (count);
+	int count = 0;
+
+	if (flag == '#' && num != 0)
+		count += _puts("0x");
+
+	count += print_number_base(num, 16);
+	return (count);
 }
