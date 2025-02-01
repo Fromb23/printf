@@ -31,7 +31,7 @@ int _printf(const char *format, ...)
 	{
 		if (*ptr == '%')
 		{
-			specifier(args, &count, ptr);
+			specifier_basic(args, &count, ptr);
 		}
 		else
 		{
