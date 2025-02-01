@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <unistd.h>
+#include "main.h"
 
 /**
  * _putchar - Writes a character to stdout
@@ -13,48 +14,7 @@ int _putchar(char ch)
 }
 
 /**
- * print_string - Handles %s specifier for printing strings
- * @str: The string to be printed
- *
- * Return: The number of characters printed
- */
-int print_string(char *str)
-{
-	int count = 0;
-
-	while (str[count] != '\0')
-	{
-		_putchar(str[count]);
-		count++;
-	}
-	return (count);
-}
-
-/**
- * print_char - Handles %c specifier for printing a character
- * @ch: The character to be printed
- *
- * Return: 1 (number of characters printed)
- */
-int print_char(char ch)
-{
-	_putchar(ch);
-	return (1);
-}
-
-/**
- * print_percent - Handles %% specifier for printing a percent symbol
- *
- * Return: 1 (number of characters printed)
- */
-int print_percent(void)
-{
-	_putchar('%');
-	return (1);
-}
-
-/**
- * _printf - Custom printf function that handles %s, %c, and %%
+ * _printf - Custom printf function that handles %s, %c, %, %d, and %i
  * @format: The format string containing the characters and specifiers
  *
  * Return: The total number of characters printed
@@ -71,31 +31,12 @@ int _printf(const char *format, ...)
 	{
 		if (*ptr == '%')
 		{
-			if (*(ptr + 1) == 's' || *(ptr + 1) == 'c' || *(ptr + 1) == '%')
-			{
-				if (*(ptr + 1) == 's')
-				{
-					char *str = va_arg(args, char *);
-
-					count += print_string(str);
-				}
-				else if (*(ptr + 1) == 'c')
-				{
-					char ch = (char)va_arg(args, int);
-
-					count += print_char(ch);
-				}
-				else if (*(ptr + 1) == '%')
-				{
-					count += print_percent();
-				}
-				ptr++;  /* Skip the specifier */
-			}
-			else
-			{
-				_putchar(*ptr);
-				count++;
-			}
+			specifier(args, &count, ptr);
+		}
+		else
+		{
+			_putchar(*ptr);
+			count++;
 		}
 	}
 
