@@ -29,5 +29,8 @@ int print_pointer(void *ptr, char flag);
 /* Number base conversion functions */
 int print_number_base_upper(unsigned int num, int base);
 int print_number_base(unsigned int num, int base);
+int handle_signed_length_modifier(va_list args, char length, char flag);
+int handle_unsigned_length_modifier(va_list args, char length,
+                                    char flag, char specifier);
 
 #endif
